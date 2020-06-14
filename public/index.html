@@ -1,61 +1,122 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Chat do Cordeiro</title>
+    <title>Chat</title>
+    <link rel="stylesheet" href="style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
   </head>
   <body>
-    <form id="chat" action="index.html" method="post">
-      <input type="text" name="username" placeholder="username">
-      <div class="messages"></div>
-      <input type="text" name="message" placeholder="Digite a mensagem">
-      <button type="submit" name="enviar">Enviar</button>
-    </form>
+    <div class="content">
+      <div class="messages">
+        <div class="message">
+          <img src="https://picsum.photos/200/300" alt="userImage" class="upic"/>
+          <div class="text">
+            <span class="author">AUTOR</span>
+            <p><%= port%></p>
+            <p class="time">00:00</p>
+          </div>
+        </div>
+
+
+      </div>
+      <form class="form" action="index.html" method="post">
+        <button type="button" class="emoji" onclick="showEmojis(this)"><i data-feather="smile"></i></button>
+        <div id="emojis" class="hidden">
+          <span onclick="sendEmoji('😂')">😂</span>
+          <span onclick="sendEmoji('😔')">😔</span>
+          <span onclick="sendEmoji('😛')">😛</span>
+          <span onclick="sendEmoji('😁')">😁</span>
+          <span onclick="sendEmoji('🤘')">🤘</span>
+          <span onclick="sendEmoji('❤️')">❤️</span>
+          <span onclick="sendEmoji('💔')">💔</span>
+          <span onclick="sendEmoji('😭')">😭</span>
+          <span onclick="sendEmoji('😎')">😎</span>
+        </div>
+        <input type="text" name="message" id="message" placeholder="Type your message...">
+        <button type="submit" name="button"><i data-feather="send"></i></button>
+      </form>
+    </div>
+
     <script type="text/javascript">
-      var socket=io('http://localhost:3000/')
-      console.log(socket)
+      feather.replace()
+
+      var socket=io('https://rodchat.herokuapp.com/')
+      var user = {}
+      let emoji = document.getElementById("emojis")
+
+
+      function getTime(){
+        let time = new Date();
+        let hours= time.getHours();
+        let minutes= time.getMinutes();
+        return `${hours}:${minutes}`
+      }
+      user.name = prompt("Tell me your user:")
+
       let topo = 0;
 
       function renderMessage(message){
         if(message.authorId == socket.id){
-          $('.messages').append('<div class="card mine"><img src="https://picsum.photos/200/300?random=1"/><div class="text"><span class="author">'+message.author+'</span><p>'+message.message+'</p></div></div>')
+          $('.messages').append('<div class="message owner"><img src="https://picsum.photos/200/300?random=2" alt="userImage" class="upic"/><div class="text"><span class="author">'+message.author+'</span><p>'+message.message+'</p><p class="time">'+message.time+'</p></div></div>')
         } else {
-          $('.messages').append('<div class="card"><img src="https://picsum.photos/200/300?random=2"/><div class="text"><span class="author">'+message.author+'</span><p>'+message.message+'</p></div></div>')
+          $('.messages').append('<div class="message"><img src="https://picsum.photos/200/300?random=1" alt="userImage" class="upic"/><div class="text"><span class="author">'+message.author+'</span><p>'+message.message+'</p><p class="time">'+message.time+'</p></div></div>')
         }
         topo += 1000;
         $(".messages").scrollTop(topo);
       }
 
 
-      socket.on('previowsMessages',function(messages){
-        for(message of messages){
-          renderMessage(message)
-        }
-      })
 
-      socket.on('receivedMessage',function(message){
-        renderMessage(message);
-      })
-
-      $('#chat').submit(function(e){
-        e.preventDefault();
-        var author = $('input[name=username]').val();
-        var message = $('input[name=message]').val();
-        if(author.length && message.length){
-          var messageObject={
-            authorId:socket.id,
-            author:author,
-            message:message
-          };
-          renderMessage(messageObject)
-          socket.emit('sendMessage',messageObject);
-          $('input[name=message]').val('');
+      function emojisField(){
+        let classes = emoji.classList
+        if (classes.length >1) {
+            classes.remove("emojiShow")
+            return false;
         }
-      })
+        return true;
+
+      }
+
+      function showEmojis(){
+        if(emojisField()) emoji.classList.add("emojiShow")
+      }
+      function sendEmoji(emoji){
+        let message = document.getElementById('message');
+        let text = message.value;
+        message.value = text + emoji
+        }
+
+        socket.on('previowsMessages',function(messages){
+          for(message of messages){
+            renderMessage(message)
+          }
+        })
+        socket.on('receivedMessage',function(message){
+          renderMessage(message);
+        })
+
+        $('.form').submit(function(e){
+          e.preventDefault();
+          var author = user.name;
+          var message = $('input[name=message]').val();
+          if(author.length && message.length){
+            var messageObject={
+              authorId:socket.id,
+              author:author,
+              message:message,
+              time:getTime()
+            };
+            renderMessage(messageObject)
+            socket.emit('sendMessage',messageObject);
+            $('input[name=message]').val('');
+            emojisField()
+          }
+        })
+
     </script>
   </body>
 </html>
