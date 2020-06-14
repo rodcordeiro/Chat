@@ -21,7 +21,6 @@
   display: flex;
   margin: 20px;
   min-width: 20%;
-  width: 50%;
   max-width: 80%;
   padding: 10px 15px;
 }
@@ -48,6 +47,7 @@
   color: white;
   font-weight: lighter;
   line-height: 1.3;
+  text-align: left;
 }
 .message.owner .text{
   background-color: #666666cc;
@@ -58,6 +58,7 @@
 .text .time{
   font-size: 10pt;
   align-self: flex-end;
+  color: #cccccc66;
 
 }
 
@@ -99,7 +100,7 @@ button[type=submit]{
   position: absolute;
   bottom:12vh;
   left: 2%;
-  width: 20%;
+  width: auto;
   height: auto;
   background-color: grey;
   grid-template-columns: calc(100%/3) calc(100%/3) calc(100%/3);

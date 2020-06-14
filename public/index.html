@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Chat</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
@@ -11,20 +12,9 @@
   </head>
   <body>
     <div class="content">
-      <div class="messages">
-        <div class="message">
-          <img src="https://picsum.photos/200/300" alt="userImage" class="upic"/>
-          <div class="text">
-            <span class="author">AUTOR</span>
-            <p><%= port%></p>
-            <p class="time">00:00</p>
-          </div>
-        </div>
-
-
-      </div>
+      <div class="messages"></div>
       <form class="form" action="index.html" method="post">
-        <button type="button" class="emoji" onclick="showEmojis(this)"><i data-feather="smile"></i></button>
+        <button type="button" class="emoji" onclick="showEmojis()"><i data-feather="smile"></i></button>
         <div id="emojis" class="hidden">
           <span onclick="sendEmoji('😂')">😂</span>
           <span onclick="sendEmoji('😔')">😔</span>
@@ -36,6 +26,7 @@
           <span onclick="sendEmoji('😭')">😭</span>
           <span onclick="sendEmoji('😎')">😎</span>
         </div>
+        
         <input type="text" name="message" id="message" placeholder="Type your message...">
         <button type="submit" name="button"><i data-feather="send"></i></button>
       </form>
