@@ -19,6 +19,7 @@
       var socket=io('http://localhost:3000/')
       console.log(socket)
       let topo = 0;
+
       function renderMessage(message){
         if(message.authorId == socket.id){
           $('.messages').append('<div class="card mine"><img src="https://picsum.photos/200/300?random=1"/><div class="text"><span class="author">'+message.author+'</span><p>'+message.message+'</p></div></div>')
@@ -27,7 +28,6 @@
         }
         topo += 1000;
         $(".messages").scrollTop(topo);
-        // console.log(topo)
       }
 
 
@@ -40,6 +40,7 @@
       socket.on('receivedMessage',function(message){
         renderMessage(message);
       })
+
       $('#chat').submit(function(e){
         e.preventDefault();
         var author = $('input[name=username]').val();
@@ -52,6 +53,7 @@
           };
           renderMessage(messageObject)
           socket.emit('sendMessage',messageObject);
+          $('input[name=message]').val('');
         }
       })
     </script>
