@@ -39,23 +39,13 @@ function commands(command){
   }
   if (cmd === 'help'){
     let cmdList = "Hey, here are the list of available commands:\n- /teste : returns a notification;\n- /notify: gives an alert an especific party;\n- /alert: gives an alert to all users;\n- /join: joins a party. To join multiple parties pass it separated by space."
-    renderMessage({
-      authorId:00000,
-      author:"System",
-      message:cmdList,
-      time:getTime()
-    })
+    adminMessage(cmdList)
     return;
   }
   console.log({
     cmd: cmd,
     args: args
   })
-  renderMessage({
-    authorId:00000,
-    author:"System",
-    message:"Command not found.\nExecute /help to see available commands and how to use them.",
-    time:getTime()
-  })
+  adminMessage("Command not found.\nExecute /help to see available commands and how to use them.")
   return;
 }

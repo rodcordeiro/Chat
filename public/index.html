@@ -106,13 +106,12 @@
       let messageField = document.getElementById('message');
       messageField.addEventListener("click",()=>{emojisField()})
 
-      let emojis = ["😂","😅","😔","😛","😁","😎","😡","😱","😑","😴","🤤","😪","😭","🤦","♀️","‍♂️","💀","👍","👌","🤘","❤️","💔"]
+      let emojis = ["😂","😅","😔","😛","😁","😎","😡","😱","😑","😴","🤤","😪","😭","🤦","🤷‍♂️","‍🙏","💀","👍","👌","🤘","❤️","💔"]
       emojis.forEach((item, i) => {
         $('#emojis').append('<span onclick="sendEmoji(\''+item+'\')">'+item+'</span>')
       });
 
-
-
+      
       function renderMessage(message){
         let text = message.message.replace(/\n/gi,"<br/>")
         if(message.authorId == socket.id){
@@ -122,8 +121,13 @@
         }
         scroll()
       }
+    function adminMessage(message){
+        let text = message.replace(/\n/gi,"<br/>")
+        $('.messages').append('<div class="message"><img src="https://christopherthescholiast.com/wp-content/uploads/2014/11/skeletor_you-dont-say.jpg" alt="userImage" class="upic"/><div class="text"><span class="author">SYSTEM</span><p>'+text+'</p><p class="time">'+getTime()+'</p></div></div>')
+        scroll()
+      }
 
-
+adminMessage("Hey, dude. Welcome to my chat!\n I build with socket.io, nodeJS and express, following the steps on <a href='https://youtu.be/-jXfKDYJJvo'>this video</a> but as you see, I've added some features.\nOn my chat you can send emojis, use commands and join parties. To see the available commands send /help. I hope you like it.")
 
 
       function emojisField(){
@@ -161,12 +165,7 @@
         })
 
         socket.on('fail',function(error){
-          renderMessage({
-            authorId:00000,
-            author:"System",
-            message:error,
-            time:getTime()
-          })
+          adminMessage(error)
         })
 
         socket.on('newUser',function(user){
@@ -199,7 +198,6 @@
             emojisField()
           }
         })
-
     </script>
   </body>
 </html>
