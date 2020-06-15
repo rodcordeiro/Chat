@@ -16,6 +16,8 @@
 .messages{
   height: 90vh;
   overflow-x:hidden;
+  display: flex;
+  flex-direction: column;
 }
 .message{
   display: flex;
@@ -42,7 +44,7 @@
   min-height: 50px;
   background-color: #66666644;
   justify-content: space-between;
-  border-radius: 5px;
+  border-radius: 0px 15px 15px 15px;
   padding: 5px 10px;
   color: white;
   font-weight: lighter;
@@ -51,6 +53,8 @@
 }
 .message.owner .text{
   background-color: #666666cc;
+  border-radius: 15px 0px 15px 15px;
+
 }
 .text .author{
   font-size: 10pt;
@@ -59,7 +63,6 @@
   font-size: 10pt;
   align-self: flex-end;
   color: #cccccc66;
-
 }
 
 .form{
@@ -115,4 +118,12 @@ button[type=submit]{
 }
 .emojiShow{
   display: grid;
+}
+.notification{
+  margin: 10px;
+  width: 100%;
+  color: #f4f4f466;
+  text-align: center;
+  padding: 5px;
+  background: linear-gradient(90deg, transparent 0%,#cccccc22 50%,transparent 100%);
 }

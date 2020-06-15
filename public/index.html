@@ -2,9 +2,67 @@
 <html lang="pt-br" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Chat</title>
+    <title>Chat with Socket.io | Cordeiro's DEV</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- Informações da página -->
+    <link rel="home" href="https://rodchat.herokuapp.com/">
+
+    <!-- Informações sobre o Site quando o link é compartilhado-->
+    <meta property='og:type' content='website'>
+    <meta property='og:locale' content='pt_BR' />
+    <meta property="og:image" content="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/android-icon-192x192.png"/>
+    <meta property='og:site_name' content='RealTime Chat with Socket.io | Cordeiros DEV'>
+    <meta property="og:title" content="RealTime Chat with Socket.io | Cordeiros DEV">
+    <meta property='og:determiner' content='the'>
+    <meta name="og:url" content="https://rodchat.herokuapp.com/" />
+    <meta name="og:description" content="A real time chat created with socket.io, express and nodeJS.">
+    <meta property='og:image:secure_url' content='HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/android-icon-192x192.png'/>
+
+    <meta name='twitter:card' content='summary' />
+    <meta name='twitter:description' content="A real time chat created with socket.io, express and nodeJS.">
+    <meta name='twitter:title' content="RealTime Chat with Socket.io | Cordeiros DEV">
+    <meta name='twitter:site' content='@drigocordeiro13' />
+    <meta name='twitter:image' content='HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/android-icon-192x192.png'/>
+    <meta name='twitter:creator' content='@drigocordeiro13' />
+
+    <link rel='prefetch' href="https://rodchat.herokuapp.com/">
+    <link rel='prerender' href="https://rodchat.herokuapp.com/">
+
+    <meta itemprop='name' content="RealTime Chat with Socket.io | Cordeiros DEV">
+    <meta itemprop='url' content="https://rodchat.herokuapp.com/">
+    <meta property="title" content="RealTime Chat with Socket.io | Cordeiros DEV">
+    <meta property='description' content="A real time chat created with socket.io, express and nodeJS.">
+    <link rel="shortcut icon" type="image/ico" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/favicon.ico" />
+
+    <!-- Outros dados como o site, como permissão para indexação do site, faixa etária, idioma, etc. -->
+    <meta name='robots' content='index'>
+    <meta name='rating' content='general'>
+    <meta name='language' content='pt-br'>
+
+    <!-- Informações sobre o Autor -->
+    <meta property='author' content='Rodrigo Cordeiro'>
+    <meta name='dc.creator.address' content='rodrigomendoncca@gmail.com'>
+
+    <!-- FAVICON -->
+	<link rel="apple-touch-icon" sizes="57x57" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/favicon-16x16.png">
+	<link rel="manifest" href="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/manifest.json">
+	<meta name="msapplication-TileImage" content="HTTPS://rodcordeiro.github.io/shares/favicons/favicon-rc/ms-icon-144x144.png">
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
@@ -12,53 +70,59 @@
   </head>
   <body>
     <div class="content">
-      <div class="messages"></div>
+      <div class="messages">
+      </div>
       <form class="form" action="index.html" method="post">
         <button type="button" class="emoji" onclick="showEmojis()"><i data-feather="smile"></i></button>
         <div id="emojis" class="hidden">
-          <span onclick="sendEmoji('😂')">😂</span>
-          <span onclick="sendEmoji('😔')">😔</span>
-          <span onclick="sendEmoji('😛')">😛</span>
-          <span onclick="sendEmoji('😁')">😁</span>
-          <span onclick="sendEmoji('🤘')">🤘</span>
-          <span onclick="sendEmoji('❤️')">❤️</span>
-          <span onclick="sendEmoji('💔')">💔</span>
-          <span onclick="sendEmoji('😭')">😭</span>
-          <span onclick="sendEmoji('😎')">😎</span>
         </div>
-        
+
         <input type="text" name="message" id="message" placeholder="Type your message...">
         <button type="submit" name="button"><i data-feather="send"></i></button>
       </form>
     </div>
-
+    <script src="script.js" charset="utf-8"></script>
     <script type="text/javascript">
       feather.replace()
 
-      var socket=io('https://rodchat.herokuapp.com/')
       var user = {}
-      let emoji = document.getElementById("emojis")
-
-
-      function getTime(){
-        let time = new Date();
-        let hours= time.getHours();
-        let minutes= time.getMinutes();
-        return `${hours}:${minutes}`
-      }
+      var socket=io('http://localhost:3000/')
       user.name = prompt("Tell me your user:")
+      var ff = [
+             "Cloud Strife",
+             "Sephiroth",
+             "Vincent Valentine",
+             "Zack Fair",
+             "Aerith Gainsborough",
+             "Tifa Lockhart",
+             "Barret Wallace",
+             "Yuffie Kisaragi",
+         ];
+        if(!user.name) user.name = ff[Math.floor(Math.random() * ff.length)];
+      socket.emit('registerUser',user);
 
-      let topo = 0;
+
+      let emoji = document.getElementById("emojis")
+      let messageField = document.getElementById('message');
+      messageField.addEventListener("click",()=>{emojisField()})
+
+      let emojis = ["😂","😅","😔","😛","😁","😎","😡","😱","😑","😴","🤤","😪","😭","🤦","♀️","‍♂️","💀","👍","👌","🤘","❤️","💔"]
+      emojis.forEach((item, i) => {
+        $('#emojis').append('<span onclick="sendEmoji(\''+item+'\')">'+item+'</span>')
+      });
+
+
 
       function renderMessage(message){
+        let text = message.message.replace(/\n/gi,"<br/>")
         if(message.authorId == socket.id){
-          $('.messages').append('<div class="message owner"><img src="https://picsum.photos/200/300?random=2" alt="userImage" class="upic"/><div class="text"><span class="author">'+message.author+'</span><p>'+message.message+'</p><p class="time">'+message.time+'</p></div></div>')
+          $('.messages').append('<div class="message owner"><img src="https://picsum.photos/200/300?random=2" alt="userImage" class="upic"/><div class="text"><span class="author">'+message.author+'</span><p>'+text+'</p><p class="time">'+message.time+'</p></div></div>')
         } else {
-          $('.messages').append('<div class="message"><img src="https://picsum.photos/200/300?random=1" alt="userImage" class="upic"/><div class="text"><span class="author">'+message.author+'</span><p>'+message.message+'</p><p class="time">'+message.time+'</p></div></div>')
+          $('.messages').append('<div class="message"><img src="https://picsum.photos/200/300?random=1" alt="userImage" class="upic"/><div class="text"><span class="author">'+message.author+'</span><p>'+text+'</p><p class="time">'+message.time+'</p></div></div>')
         }
-        topo += 1000;
-        $(".messages").scrollTop(topo);
+        scroll()
       }
+
 
 
 
@@ -75,11 +139,13 @@
       function showEmojis(){
         if(emojisField()) emoji.classList.add("emojiShow")
       }
+
       function sendEmoji(emoji){
         let message = document.getElementById('message');
         let text = message.value;
         message.value = text + emoji
         }
+
 
         socket.on('previowsMessages',function(messages){
           for(message of messages){
@@ -90,11 +156,36 @@
           renderMessage(message);
         })
 
+        socket.on('notification',function(notification){
+          notify(notification)
+        })
+
+        socket.on('fail',function(error){
+          renderMessage({
+            authorId:00000,
+            author:"System",
+            message:error,
+            time:getTime()
+          })
+        })
+
+        socket.on('newUser',function(user){
+            notify(user.name+' has joined the server')
+        })
+
+        function notify(info){
+          $('.messages').append('<span class="notification">'+info+'</span>')
+          scroll()
+        }
+        function joinParty(){}
         $('.form').submit(function(e){
           e.preventDefault();
           var author = user.name;
           var message = $('input[name=message]').val();
           if(author.length && message.length){
+            if (message.startsWith('/')){
+              commands(message)
+            }else{
             var messageObject={
               authorId:socket.id,
               author:author,
@@ -103,6 +194,7 @@
             };
             renderMessage(messageObject)
             socket.emit('sendMessage',messageObject);
+          }
             $('input[name=message]').val('');
             emojisField()
           }
