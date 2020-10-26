@@ -1,3 +1,5 @@
+@import url('http://rodcordeiro.github.io/shares/fonts/Aurebesh/font.css');
+
 *{
   margin: 0;
   padding: 0;
@@ -25,6 +27,7 @@
   min-width: 20%;
   max-width: 80%;
   padding: 10px 15px;
+  font-family: 'Aurebesh'
 }
 .message.owner{
   float: right;
