@@ -59,6 +59,9 @@
   border-radius: 15px 0px 15px 15px;
   font-family: 'Aurebesh';
 }
+.message.owner .text p, .text p{
+  font-family: 'Aurebesh';
+}
 .text .author{
   font-size: 10pt;
   font-family: sans-serif;
