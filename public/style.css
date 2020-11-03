@@ -1,4 +1,4 @@
-@import url('https://rodcordeiro.github.io/shares/fonts/Aurebesh/font.css');
+/* @import url('https://rodcordeiro.github.io/shares/fonts/Aurebesh/font.css'); */
 
 *{
   margin: 0;
@@ -52,15 +52,15 @@
   font-weight: lighter;
   line-height: 1.3;
   text-align: left;
-  font-family: 'Aurebesh';
+  font-family: sans-serif;
 }
 .message.owner .text{
   background-color: #666666cc;
   border-radius: 15px 0px 15px 15px;
-  font-family: 'Aurebesh';
+  font-family: sans-serif;
 }
 .message.owner .text p, .text p{
-  font-family: 'Aurebesh';
+  font-family: sans-serif;
 }
 .text .author{
   font-size: 10pt;
@@ -89,7 +89,7 @@ input[name=message],input[name=message]:focus{
   outline:none;
   line-height: 1.3;
   font-size: 12pt;
-  font-family: 'Aurebesh';
+  font-family: sans-serif;
 }
 button{
   width: 5%;
